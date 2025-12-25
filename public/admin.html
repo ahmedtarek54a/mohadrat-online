@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - Admin</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-container {
+            padding: 2rem 0;
+        }
+
+        .admin-section {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-section h2 {
+            margin-top: 0;
+            color: #333;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        table th,
+        table td {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            text-align: right;
+        }
+
+        table th {
+            background: #f9f9f9;
+        }
+
+        .btn-delete {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-delete:hover {
+            background: #cc0000;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="index.html"><span class="brand-text">لوحة التحكم</span></a>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="courses.html">الكورسات</a></li>
+                    <li><a href="#" id="logout-btn">تسجيل الخروج</a></li>
+                    <li><button id="lang-btn" class="btn small ghost" style="padding: 5px 10px;">EN</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container admin-container">
+        <h1><span data-i18n="adminDashboard">لوحة تحكم المسؤول</span></h1>
+
+        <!-- Stats Section -->
+        <section class="admin-section stats-card"
+            style="text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <h2>عدد الطلاب المسجلين</h2>
+            <div id="student-count" style="font-size: 3rem; font-weight: bold;">Loading...</div>
+        </section>
+
+        <!-- Add Course Section -->
+        <section class="admin-section">
+            <h2 data-i18n="addCourse">إضافة كورس جديد</h2>
+            <form id="add-course-form">
+                <div class="form-group">
+                    <label data-i18n="courseTitle">عنوان الكورس</label>
+                    <input type="text" id="course-title" required>
+                </div>
+                <div class="form-group">
+                    <label data-i18n="courseDesc">وصف الكورس</label>
+                    <textarea id="course-desc" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label data-i18n="courseImage">صورة الكورس (Course Image)</label>
+                    <input type="file" id="course-image" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <label data-i18n="courseLink">الرابط (اسم ملف HTML للتفاصيل)</label>
+                    <input type="text" id="course-link" placeholder="مثال: course-detail.html" required>
+                </div>
+                <button type="submit" class="btn primary" data-i18n="addCourseBtn">إضافة الكورس</button>
+            </form>
+        </section>
+
+        <!-- Add Video Section -->
+        <section class="admin-section">
+            <h2>إضافة فيديو (Add Video)</h2>
+            <form id="add-video-form">
+                <div class="form-group">
+                    <label>عنوان الفيديو (Video Title)</label>
+                    <input type="text" id="video-title" required>
+                </div>
+                <div class="form-group">
+                    <label>نوع المصدر (Source Type)</label>
+                    <select id="video-source-type">
+                        <option value="youtube">YouTube URL</option>
+                        <option value="file">رفع ملف (Upload File)</option>
+                    </select>
+                </div>
+                <!-- YouTube Input -->
+                <div class="form-group" id="video-url-group">
+                    <label>رابط يوتيوب (YouTube URL)</label>
+                    <input type="text" id="video-url" placeholder="https://www.youtube.com/watch?v=...">
+                </div>
+                <!-- File Input -->
+                <div class="form-group" id="video-file-group" style="display: none;">
+                    <label>ملف الفيديو (Video File)</label>
+                    <input type="file" id="video-file" accept="video/*">
+                </div>
+
+                <button type="submit" class="btn primary">إضافة الفيديو</button>
+            </form>
+        </section>
+
+        <!-- Add Assignment Section -->
+        <section class="admin-section">
+            <h2>إضافة واجب (Add Assignment)</h2>
+            <form id="add-assignment-form">
+                <div class="form-group">
+                    <label>عنوان الواجب (Title)</label>
+                    <input type="text" id="assign-title" required>
+                </div>
+                <div class="form-group">
+                    <label>ملف الواجب (PDF/Doc)</label>
+                    <input type="file" id="assign-file" accept=".pdf,.doc,.docx" required>
+                </div>
+                <button type="submit" class="btn primary">إضافة الواجب</button>
+            </form>
+        </section>
+
+        <!-- Manage Students Section -->
+        <section class="admin-section">
+            <h2 data-i18n="manageStudents">إدارة الطلاب</h2>
+            <div id="users-list-container">Loading users...</div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // Specific Admin Logic
+        document.addEventListener('DOMContentLoaded', async () => {
+            const currentUser = JSON.parse(localStorage.getItem('edu_user_data') || '{}');
+            if (currentUser.role !== 'admin') {
+                alert('غير مصرح لك بالدخول هنا');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Add Course
+            document.getElementById('add-course-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                try {
+                    const imageInput = document.getElementById('course-image');
+                    if (imageInput.files.length === 0) return alert('الرجاء اختيار صورة للكورس');
+
+                    const uploadData = await uploadFile(imageInput.files[0]);
+
+                    const course = {
+                        title: document.getElementById('course-title').value,
+                        description: document.getElementById('course-desc').value,
+                        image: uploadData.filePath, // Use uploaded path
+                        link: document.getElementById('course-link').value,
+                        price: 'Free' // Default or add input for it
+                    };
+
+                    const res = await fetch('/api/courses', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(course)
+                    });
+                    if (res.ok) {
+                        window.showToast ? showToast('تم إضافة الكورس بنجاح', 'success') : alert('تم إضافة الكورس بنجاح');
+                        e.target.reset();
+                    } else {
+                        window.showToast ? showToast('خطأ في الإضافة', 'error') : alert('خطأ في الإضافة');
+                    }
+                } catch (err) {
+                    console.error(err);
+                    window.showToast ? showToast('خطأ في الاتصال', 'error') : alert('خطأ في الاتصال');
+                }
+            });
+
+            // Load Users
+            async function loadUsers() {
+                try {
+                    const res = await fetch('/api/users');
+                    const users = await res.json();
+                    const container = document.getElementById('users-list-container');
+
+                    let html = '<table><thead><tr><th data-i18n="name">الاسم</th><th data-i18n="email">البريد</th><th data-i18n="role">الدور</th><th data-i18n="action">إجراء</th></tr></thead><tbody>';
+                    users.forEach(u => {
+                        html += `<tr>
+                        <td>${u.name}</td>
+                        <td>${u.email}</td>
+                        <td>${u.role}</td>
+                        <td>
+                            ${u.role !== 'admin' ? `<button class="btn-delete" onclick="deleteUser('${u.email}')">حذف</button>` : '-'}
+                        </td>
+                    </tr>`;
+                    });
+                    html += '</tbody></table>';
+                    container.innerHTML = html;
+
+                    // Update Student Count
+                    const studentCount = users.filter(u => u.role === 'student').length;
+                    const countEl = document.getElementById('student-count');
+                    if (countEl) countEl.innerText = studentCount;
+
+                } catch (err) {
+                    console.error(err);
+                }
+            }
+
+            window.deleteUser = async (email) => {
+                if (confirm('هل أنت متأكد من حذف هذا المستخدم؟')) {
+                    const res = await fetch(`/api/users/${email}`, { method: 'DELETE' });
+                    if (res.ok) loadUsers();
+                }
+            };
+
+            loadUsers();
+
+            // Toggle Video Source
+            const sourceTypeSelect = document.getElementById('video-source-type');
+            const urlGroup = document.getElementById('video-url-group');
+            const fileGroup = document.getElementById('video-file-group');
+
+            sourceTypeSelect.addEventListener('change', (e) => {
+                if (e.target.value === 'youtube') {
+                    urlGroup.style.display = 'block';
+                    fileGroup.style.display = 'none';
+                } else {
+                    urlGroup.style.display = 'none';
+                    fileGroup.style.display = 'block';
+                }
+            });
+
+            // Upload Helper
+            async function uploadFile(file) {
+                const formData = new FormData();
+                formData.append('file', file);
+                const res = await fetch('/api/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                if (!res.ok) throw new Error('File upload failed');
+                return await res.json();
+            }
+
+            // Handle Add Video
+            document.getElementById('add-video-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const title = document.getElementById('video-title').value;
+                const type = sourceTypeSelect.value;
+                let url = '';
+
+                try {
+                    if (type === 'file') {
+                        const fileInput = document.getElementById('video-file');
+                        if (fileInput.files.length === 0) return alert('الرجاء اختيار ملف');
+                        const uploadData = await uploadFile(fileInput.files[0]);
+                        url = uploadData.filePath;
+                    } else {
+                        url = document.getElementById('video-url').value;
+                        if (!url) return alert('الرجاء إدخال الرابط');
+                    }
+
+                    const res = await fetch('/api/videos', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ title, type, url })
+                    });
+
+                    if (res.ok) {
+                        window.showToast ? showToast('تم إضافة الفيديو بنجاح', 'success') : alert('Success');
+                        e.target.reset();
+                        // Reset Toggle
+                        sourceTypeSelect.value = 'youtube';
+                        urlGroup.style.display = 'block';
+                        fileGroup.style.display = 'none';
+                    } else {
+                        window.showToast ? showToast('خطأ في الإضافة', 'error') : alert('Error');
+                    }
+                } catch (err) {
+                    console.error(err);
+                    window.showToast ? showToast('خطأ في الاتصال', 'error') : alert('Error');
+                }
+            });
+
+            // Handle Add Assignment
+            document.getElementById('add-assignment-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const title = document.getElementById('assign-title').value;
+                const fileInput = document.getElementById('assign-file');
+
+                if (fileInput.files.length === 0) return alert('الرجاء اختيار ملف');
+
+                try {
+                    const uploadData = await uploadFile(fileInput.files[0]);
+
+                    const res = await fetch('/api/assignments', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            title,
+                            fileUrl: uploadData.filePath,
+                            originalName: uploadData.originalName
+                        })
+                    });
+
+                    if (res.ok) {
+                        window.showToast ? showToast('تم إضافة الواجب بنجاح', 'success') : alert('Success');
+                        e.target.reset();
+                    } else {
+                        window.showToast ? showToast('خطأ في الإضافة', 'error') : alert('Error');
+                    }
+                } catch (err) {
+                    console.error(err);
+                    window.showToast ? showToast('خطأ في الاتصال', 'error') : alert('Error');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

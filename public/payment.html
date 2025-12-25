@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إتمام الدفع - Checkout</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      min-height: 100vh;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    .payment-container {
+      max-width: 500px;
+      margin: 100px auto 50px;
+      background: rgba(15, 23, 32, 0.9);
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .payment-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #00d1b2, #6b5ce5, #38bdf8);
+      animation: shimmer 2s linear infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .payment-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .payment-header h2 {
+      color: #fff;
+      font-size: 2rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .payment-header p {
+      color: #94a3b8;
+      font-size: 1.1rem;
+    }
+
+    .payment-summary {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(5px);
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      border-right: 4px solid #00d1b2;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .payment-summary h3 {
+      color: #fff;
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+    }
+
+    .payment-summary p {
+      color: #e2e8f0;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .card-icons {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 25px;
+      justify-content: center;
+      font-size: 28px;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      color: #e2e8f0;
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #00d1b2;
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 0 3px rgba(0, 209, 178, 0.1);
+    }
+
+    .form-group input::placeholder {
+      color: #64748b;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 15px;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    .secure-badge {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #94a3b8;
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px;
+      background: rgba(0, 209, 178, 0.1);
+      border-radius: 8px;
+      border: 1px solid rgba(0, 209, 178, 0.2);
+    }
+
+    .btn.primary.full-width {
+      width: 100%;
+      padding: 15px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-top: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn.primary.full-width::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .btn.primary.full-width:hover::before {
+      left: 100%;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .payment-container {
+        margin: 80px 20px 30px;
+        padding: 30px 20px;
+      }
+
+      .payment-header h2 {
+        font-size: 1.6rem;
+      }
+
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">محاضرات <span class="highlight">أونلاين</span></a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="payment-container">
+      <div class="payment-header">
+        <h2>إتمام الشراء</h2>
+        <p>الخطوة الأخيرة للحصول على الدورة</p>
+      </div>
+
+      <div class="payment-summary">
+        <h3>ملخص الطلب</h3>
+        <p id="course-name-display"><strong>الدورة:</strong> جاري التحميل...</p>
+        <p><strong>السعر:</strong> $99.00</p>
+      </div>
+
+      <form id="payment-form">
+        <div class="card-icons">
+          <span>💳</span> <span>Visa</span> <span>Mastercard</span>
+        </div>
+
+        <div class="form-group">
+          <label>اسم حامل البطاقة</label>
+          <input type="text" placeholder="الاسم كما يظهر على البطاقة" required>
+        </div>
+
+        <div class="form-group">
+          <label>رقم البطاقة</label>
+          <input type="text" placeholder="0000 0000 0000 0000" maxlength="19" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>تاريخ الانتهاء</label>
+            <input type="text" placeholder="MM/YY" maxlength="5" required>
+          </div>
+          <div class="form-group">
+            <label>رمز الأمان (CVV)</label>
+            <input type="text" placeholder="123" maxlength="3" required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn primary full-width" style="width:100%; margin-top:10px;">دفع الان
+          ($99.00)</button>
+
+        <div class="secure-badge">
+          🔒 جميع المعاملات مشفرة وآمنة 100%
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const courseData = JSON.parse(localStorage.getItem('course_to_pay_for'));
+
+      if (!courseData) {
+        alert('لا يوجد كورس محدد للدفع!');
+        window.location.href = 'courses.html';
+        return;
+      }
+
+      document.getElementById('course-name-display').innerHTML = `<strong>الدورة:</strong> ${courseData.name}`;
+
+      document.getElementById('payment-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Simulate processing delay
+        const btn = e.target.querySelector('button');
+        const originalText = btn.textContent;
+        btn.textContent = 'جاري المعالجة...';
+        btn.disabled = true;
+
+        setTimeout(() => {
+          // Call the main script function to finalize
+          if (typeof purchaseCourseFinalize === 'function') {
+            purchaseCourseFinalize(courseData.id, courseData.name);
+          } else {
+            // Fallback if script.js logic isn't reachable mostly unlikely if included
+            console.error('Finalize function not found');
+            alert('حدث خطأ في النظام');
+          }
+        }, 1500);
+      });
+    });
+  </script>
+</body>
+
+</html>

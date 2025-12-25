@@ -1,0 +1,43 @@
+[
+  {
+    "id": "post-1765823841260",
+    "author": "he",
+    "content": "thans Eng Hashem",
+    "timestamp": "2025-12-15T18:37:21.260Z",
+    "replies": [
+      {
+        "id": "reply-1765825685263",
+        "author": "Ahmed Tarek",
+        "content": "Okay \n",
+        "timestamp": "2025-12-15T19:08:05.263Z"
+      },
+      {
+        "id": "reply-1766506666477",
+        "author": "Ahmed Tarek",
+        "content": "okay",
+        "timestamp": "2025-12-23T16:17:46.477Z"
+      }
+    ]
+  },
+  {
+    "id": "post-welcome",
+    "author": "Admin",
+    "content": "Welcome to the new Student Forum! Feel free to ask questions about your courses here.",
+    "timestamp": "2025-12-15T12:00:00.000Z",
+    "replies": [
+      {
+        "id": "reply-1",
+        "author": "System",
+        "content": "Please keep discussions respectful and on-topic.",
+        "timestamp": "2025-12-15T12:01:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": "post-question-1",
+    "author": "Student Helper",
+    "content": "Has anyone started the Web Development assignment yet?",
+    "timestamp": "2025-12-15T14:30:00.000Z",
+    "replies": []
+  }
+]

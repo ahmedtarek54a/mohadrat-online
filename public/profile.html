@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My Profile</title>
+    <link rel="stylesheet" href="style.css" />
+    <meta name="theme-color" content="#0f1720">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="index.html" aria-label="Mohadrat Online Home">
+                <img src="channels4_profile.jpg" alt="logo" class="logo" loading="lazy" />
+                <span class="brand-text">محاضرات أونلاين</span>
+            </a>
+
+            <nav class="nav" aria-label="Main navigation">
+                <button id="menu-btn" class="menu-btn" aria-label="Open menu">☰</button>
+                <ul class="nav-list" id="nav-list">
+                    <li><a href="index.html" data-i18n="home">Home</a></li>
+                    <li><a href="courses.html" data-i18n="courses">Courses</a></li>
+                    <li><a href="login.html" data-i18n="login">Log in</a></li>
+                </ul>
+
+                <div id="auth-controls" class="auth-controls">
+                    <a class="profile" href="profile.html" id="user-profile-link" aria-label="Profile">
+                        <img src="channels4_profile.jpg" alt="profile" loading="lazy"
+                            style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; margin-left:10px;" />
+                    </a>
+                    <button id="logout-btn" class="btn small ghost"
+                        style="display: none; margin-right: 10px; font-size: 0.8rem;" data-i18n="logout">تسجيل
+                        الخروج</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container section">
+
+        <div class="profile-header card" style="text-align: center; margin-bottom: 40px; padding: 40px 20px;">
+            <img src="channels4_profile.jpg" id="profile-avatar"
+                style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); margin-bottom: 20px;">
+            <h2 id="profile-name" style="margin-bottom: 5px;">Loading...</h2>
+            <p id="profile-email" class="meta" style="font-size: 1rem;">...</p>
+            <p id="profile-role" class="meta" style="color: var(--accent);">Student</p>
+        </div>
+
+        <section>
+            <h2 class="section-title">My Courses (كورساتي)</h2>
+            <div id="my-courses-grid" class="grid-3">
+                <!-- Courses will be loaded here -->
+                <p class="lead" style="grid-column: 1/-1; text-align: center; padding: 40px;">No courses purchased yet.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="copyright">
+            <div class="container" data-i18n="copyright">© 2025 Mohadrat Online</div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Profile Specific Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const userData = JSON.parse(localStorage.getItem('edu_user_data') || '{}');
+            const isLoggedIn = localStorage.getItem('edu_is_logged_in') === 'true';
+
+            if (!isLoggedIn) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Fill User Info
+            document.getElementById('profile-name').textContent = userData.name || 'Student';
+            document.getElementById('profile-email').textContent = userData.email || 'No Email';
+            document.getElementById('profile-role').textContent = (userData.role || 'student').toUpperCase();
+
+            // Load Purchased Courses
+            const userEmail = userData.email;
+            const purchasedIds = JSON.parse(localStorage.getItem(`edu_purchased_${userEmail}`) || '[]');
+
+            if (purchasedIds.length > 0) {
+                const grid = document.getElementById('my-courses-grid');
+
+                // Fetch all courses to match IDs
+                fetch('/api/courses')
+                    .then(res => res.json())
+                    .then(allCourses => {
+                        const myCourses = allCourses.filter(c => purchasedIds.includes(c.id));
+
+                        if (myCourses.length > 0) {
+                            grid.innerHTML = ''; // Clear placeholder
+                            myCourses.forEach(course => {
+                                const article = document.createElement('article');
+                                article.className = 'course-card';
+                                article.innerHTML = `
+                                <div class="course-img-wrapper" style="background:#ddd;height:150px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:10px 10px 0 0;">
+                                    <img src="${course.image}" style="width:100%;height:100%;object-fit:cover;" onerror="this.src='images/placeholder.png'"/>
+                                </div>
+                                <div class="course-body">
+                                    <h4>${course.title}</h4>
+                                    <div class="course-actions">
+                                        <a class="btn primary small" href="course-detail-limits.html" style="width:100%;">Watch Now</a>
+                                    </div>
+                                </div>
+                            `;
+                                grid.appendChild(article);
+                            });
+                        }
+                    });
+            }
+        });
+    </script>
+</body>
+
+</html>

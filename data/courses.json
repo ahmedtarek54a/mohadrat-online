@@ -1,0 +1,66 @@
+[
+  {
+    "id": "web-dev-beginners",
+    "title": "Web Development for Beginners",
+    "description": "HTML, CSS, JS basics and small projects.",
+    "image": "webdev.png",
+    "price": "Free",
+    "link": "course-detail-webdev.html"
+  },
+  {
+    "id": "app-dev-beginners",
+    "title": "App Development for Beginners",
+    "description": "Intro to mobile apps and simple projects.",
+    "image": "app_development.jpg",
+    "price": "Free",
+    "link": "course-detail-app.html"
+  },
+  {
+    "id": "c-programming",
+    "title": "C Programming course",
+    "description": "C programming is a powerful and widely used programming language.",
+    "image": "b5f0e99c5c7e1fc3ea1ca5510f025b6a.jpg",
+    "price": "Free",
+    "link": "course-detail-app.html"
+  },
+  {
+    "id": "cpp-programming",
+    "title": "C++ Programming Language",
+    "description": "C++ is a programming language known for its fast speed",
+    "image": "618089c119b61987875427ec0f6c0fcd.jpg",
+    "price": "Free",
+    "link": "course-detail-app.html"
+  },
+  {
+    "id": "php-programming",
+    "title": "10 Programming Languages to learn",
+    "description": "PHP is one of the first back-end languages that new web developers find interesting to learn.",
+    "image": "ac20816fe68a06e882626a039412619a.jpg",
+    "price": "Free",
+    "link": "course-detail-app.html"
+  },
+  {
+    "id": "unix-linux",
+    "title": "Unix vs Linux: How They've Changed Over Time",
+    "description": "Unix and Linux are two of the most widely used operating systems in the world",
+    "image": "de1b4d6e3455bb1f1fda4f33022d35be.jpg",
+    "price": "Free",
+    "link": "course-detail-app.html"
+  },
+  {
+    "id": "full-stack",
+    "title": "Full Stack Development",
+    "description": "From front-end to backend basics.",
+    "image": "Full_Stack.png",
+    "price": "Free",
+    "link": "course-detail-fullstack.html"
+  },
+  {
+    "id": "limits-paid",
+    "title": "Limits and Continuity (Paid)",
+    "description": "Premium Calculus Course.",
+    "image": "f limite.png",
+    "price": "$50",
+    "link": "course-detail-limits.html"
+  }
+]

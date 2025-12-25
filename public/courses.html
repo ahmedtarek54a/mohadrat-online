@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title> محاضرات أونلاين— Courses</title>
+    <link rel="icon" href="channels4_profile.jpg" type="image/jpeg">
+
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Modern Course Cards Style */
+    .course-card-new {
+      background: rgba(15, 23, 32, 0.9);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .course-card-new:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      border-color: rgba(0, 209, 178, 0.3);
+    }
+
+    .course-card-new::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #00d1b2, #6b5ce5, #38bdf8);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .course-card-new:hover::before {
+      opacity: 1;
+    }
+
+    .course-image-new {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .course-card-new:hover .course-image-new {
+      transform: scale(1.05);
+    }
+
+    .course-content-new {
+      padding: 25px;
+    }
+
+    .course-title-new {
+      color: #fff;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    .course-description-new {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .course-meta-new {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .course-price-new {
+      background: rgba(0, 209, 178, 0.1);
+      color: #00d1b2;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: 700;
+      border: 1px solid rgba(0, 209, 178, 0.2);
+    }
+
+    .course-rating-new {
+      color: #fbbf24;
+      font-size: 0.9rem;
+    }
+
+    .course-btn-new {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(90deg, #00d1b2, #6b5ce5);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .course-btn-new:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 209, 178, 0.3);
+    }
+
+    /* Override grid for new cards */
+    #courses-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    /* Loading state */
+    .loading-skeleton {
+      background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+    }
+
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html"><span class="brand-text">محاضرات أونلاين</span></a>
+      <nav class="nav">
+        <button id="menu-btn" class="menu-btn" aria-label="Open menu">☰</button>
+        <ul class="nav-list" id="nav-list">
+          <li><a href="index.html" data-i18n="home">Home</a></li>
+          <li><a href="about.html" data-i18n="about">About</a></li>
+          <li><a href="courses.html" data-i18n="courses">Courses</a></li>
+          <li><a href="forum.html" data-i18n="forum">Forum</a></li>
+          <li><a href="contact.html" data-i18n="contact">Contact</a></li>
+          <li><button id="lang-btn" class="btn small ghost" style="padding: 5px 10px;">AR</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container section">
+    <h1 data-i18n="courses">Courses</h1>
+    <!-- Admin Controls Container -->
+    <div id="admin-controls" style="margin-bottom: 20px;"></div>
+    <p class="lead">Browse available courses.</p>
+
+    <div class="grid-3" id="courses-container">
+      <!-- Courses will be loaded here dynamically -->
+      <p>Loading courses...</p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer small-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <h3>Mohadrat Online</h3>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

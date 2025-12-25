@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>محاضرات أونلاين — Contact</title>
+    <link rel="icon" href="channels4_profile.jpg" type="image/jpeg">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html"><span class="brand-text">محاضرات أونلاين</span></a>
+      <nav class="nav">
+        <button id="menu-btn" class="menu-btn" aria-label="Open menu">☰</button>
+        <ul class="nav-list" id="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="forum.html">Forum</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container section">
+    <h1>Contact Us</h1>
+    <p class="lead">We'd love to hear from you — send a message below.</p>
+
+    <form id="contact-form" class="contact-form">
+      <label for="name">Name</label>
+      <input id="name" type="text" placeholder="Your name" required />
+      <label for="email">Email</label>
+      <input id="email" type="email" placeholder="you@example.com" required />
+      <label for="message">Message</label>
+      <textarea id="message" rows="5" placeholder="Your message..." required></textarea>
+      <div class="form-actions">
+        <button class="btn primary" type="submit">Send Message</button>
+      </div>
+    </form>
+
+    <div id="contact-result" class="contact-result" aria-live="polite"></div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer small-footer">
+    <div class="container footer-inner"><div class="footer-col"><h3>Mohadrat Online</h3></div></div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

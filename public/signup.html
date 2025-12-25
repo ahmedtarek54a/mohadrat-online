@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إنشاء حساب</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="auth-container">
+    <div style="text-align: right; margin-bottom: 10px;">
+      <button id="lang-btn" class="btn small ghost" style="padding: 5px 10px;">EN</button>
+    </div>
+    <h2 data-i18n="signupTitle">إنشاء حساب</h2>
+
+    <form>
+      <input type="text" placeholder="الاسم الكامل" data-i18n-placeholder="fullNamePlaceholder" required>
+      <input type="email" placeholder="البريد الإلكتروني" data-i18n-placeholder="emailPlaceholder" required>
+      <input type="password" placeholder="كلمة المرور" data-i18n-placeholder="passwordPlaceholder" required>
+      <input type="password" placeholder="تأكيد كلمة المرور" data-i18n-placeholder="confirmPasswordPlaceholder"
+        required>
+
+      <select id="role" required
+        style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px;">
+        <option value="" disabled selected data-i18n="rolePlaceholder">اختر نوع الحساب</option>
+        <option value="student" data-i18n="studentRole">طالب (Student)</option>
+        <option value="admin" data-i18n="adminRole">مسؤول (Admin)</option>
+      </select>
+
+      <button class="btn primary" data-i18n="signupBtn">إنشاء حساب</button>
+
+      <p class="switch"><span data-i18n="haveAccount">لديك حساب بالفعل؟</span>
+        <a href="login.html" data-i18n="login">تسجيل الدخول</a>
+      </p>
+    </form>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>

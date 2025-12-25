@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل الدخول</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="auth-container">
+    <div style="text-align: right; margin-bottom: 10px;">
+      <button id="lang-btn" class="btn small ghost" style="padding: 5px 10px;">EN</button>
+    </div>
+    <h2 data-i18n="loginTitle">تسجيل الدخول</h2>
+
+    <form>
+      <input type="email" placeholder="البريد الإلكتروني" data-i18n-placeholder="emailPlaceholder" required>
+      <input type="password" placeholder="كلمة المرور" data-i18n-placeholder="passwordPlaceholder" required>
+
+      <button class="btn primary" data-i18n="loginBtn">دخول</button>
+
+      <p class="switch"><span data-i18n="noAccount">ليس لديك حساب؟</span>
+        <a href="signup.html" data-i18n="signup">إنشاء حساب</a>
+      </p>
+    </form>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
